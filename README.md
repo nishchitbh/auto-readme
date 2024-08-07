@@ -79,4 +79,5 @@ This script automatically generates a README.md file for a repository using the 
 - Review the generated README.md file to ensure accuracy and completeness.
 - Remember to configure billing for your Google Cloud Project to avoid unexpected charges.
 
+# MIT License
 This project is licensed under the MIT License.
