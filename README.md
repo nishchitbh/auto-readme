@@ -1,14 +1,14 @@
 # Auto-README Generator
 
-This script automatically generates a README.md file for a repository using the Gemini Pro model from Google AI. It analyzes the code within the repository and creates a comprehensive README file based on its understanding.
+This script automatically generates a `README.md` file for a repository by leveraging the power of the Gemini Pro model. It analyzes the code within the repository and creates a comprehensive README file that includes relevant information about the project.
 
 ## Features
 
-- **Code Analysis:** Reads and understands code from various file types (c, cpp, py, js, ts, java, rs).
-- **Gemini Pro Integration:** Leverages the power of the Gemini Pro model for advanced code comprehension and README generation.
-- **Recursive File Reading:** Recursively explores the repository directory to include all relevant code files.
-- **Customizable Instructions:** Allows for customization through a `sys_instruction.txt` file to guide the model's behavior.
-- **History Management:** Utilizes a `history.json` file to maintain context and improve the model's performance over time.
+- **Automated README Generation:**  Automatically generates a `README.md` file based on the code in the repository.
+- **Gemini Pro Integration:** Utilizes the advanced capabilities of the Gemini Pro model for accurate and insightful README generation.
+- **Recursive Code Analysis:** Recursively reads and analyzes all code files within the specified directory.
+- **Customizable System Instructions:** Allows tailoring the README generation process through a `sys_instruction.txt` file.
+- **Support for multiple languages:** Supports c, cpp, py, js, ts, java, and rs.
 
 ## Requirements
 
@@ -23,61 +23,51 @@ This script automatically generates a README.md file for a repository using the 
 
 ## Usage
 
-1. **Configuration:**
-   - Create a `sys_instruction.txt` file to provide specific instructions to the Gemini Pro model regarding the desired content and format of the README.md file.
-   - (Optional) Create a `history.json` file to store previous interactions with the model, allowing for better context and improved results over time.
+1. **Place the script in your repository's root directory.**
+2. **Configure the `sys_instruction.txt` file with specific instructions for README generation.**
+3. **Run the script:**
 
-2. **Run the script:**
    ```bash
    python auto_readme.py
    ```
 
+## Configuration
+
+- **`sys_instruction.txt`:** This file contains instructions for the Gemini Pro model, allowing you to customize the README generation process. You can specify the desired sections, formatting, and level of detail.
+
+- **`history.json`:** This file contains the history of the conversation with the Gemini Pro model. It is used to maintain context and improve the quality of the generated README.
+
 ## How it Works
 
-1. **Initialization:**
-   - Loads environment variables from the `.env` file.
-   - Configures the Google Generative AI API with the provided API key.
-   - Initializes a chat session with the Gemini Pro model, using the instructions from `sys_instruction.txt` and history from `history.json` (if available).
+1. **Initialization:** The script initializes a chat session with the Gemini Pro model.
+2. **Code Analysis:** It recursively reads all code files within the repository's root directory.
+3. **README Generation:** The script sends the code to the Gemini Pro model and receives the generated README content.
+4. **File Writing:** The generated README content is written to a `README.md` file in the repository's root directory.
 
-2. **Code Extraction:**
-   - Recursively reads all code files within the repository directory, excluding specified ignored directories (e.g., `venv`, `.git`).
-   - Filters files based on supported extensions (c, cpp, py, js, ts, java, rs).
-   - Stores the content of each file in a dictionary.
+## Example `sys_instruction.txt`
 
-3. **README Generation:**
-   - Converts the code dictionary into a JSON string.
-   - Sends the JSON string to the Gemini Pro model through the chat session.
-   - Receives the generated README.md content from the model.
+```
+You are a helpful AI assistant that generates README files for code repositories.
+Analyze the provided code and create a comprehensive README.md file that includes the following sections:
 
-4. **File Writing:**
-   - Writes the generated README.md content to a file named `README.md` in the repository's root directory.
-
-## Customization
-
-- **`sys_instruction.txt`:** This file allows you to customize the behavior of the Gemini Pro model by providing specific instructions. For example:
-
-   ```
-   You are a helpful AI assistant that generates README files for code repositories.
-   Please include the following sections in the README:
-   - Title
-   - Description
-   - Features
-   - Requirements
-   - Usage
-   - How it Works
-   - Customization (if applicable)
-   - Examples (if applicable)
-   - Notes (if applicable)
-   ```
-
-- **`history.json`:** This file can be used to store previous interactions with the model, allowing for better context and potentially improved results over time.
+- **Title:** A concise and descriptive title for the project.
+- **Description:** A brief overview of the project's purpose and functionality.
+- **Features:** A list of key features and capabilities.
+- **Requirements:** A list of necessary dependencies and prerequisites.
+- **Usage:** Clear instructions on how to use the project.
+- **Configuration:** Details on any configuration options or settings.
+- **Example:** Provide a simple example demonstrating the project's usage.
+- **License:** Specify the license under which the project is distributed.
+```
 
 ## Important Notes
 
-- Ensure that the `GEMINI_API_KEY` is correctly set in the `.env` file.
-- The quality of the generated README.md file depends on the clarity and structure of the code, as well as the instructions provided in `sys_instruction.txt`.
-- Review the generated README.md file to ensure accuracy and completeness.
+- Ensure your `.env` file contains the `GEMINI_API_KEY`.
+- The script currently supports several common programming languages. Support for other languages may be added in the future.
+- The quality of the generated README depends on the clarity and structure of the code.
+- Review the generated README to ensure accuracy and completeness.
 - Remember to configure billing for your Google Cloud Project to avoid unexpected charges.
 
-# MIT License
+## License
+
 This project is licensed under the MIT License.
